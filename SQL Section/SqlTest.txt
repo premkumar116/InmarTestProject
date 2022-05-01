@@ -1,0 +1,17 @@
+SQL Section : 
+1. 
+Select * from customer where Name Like 'Joe%'
+2.
+Select p.Name from Product p , join OrderProduct op ON  p.productId = op.productId  join 
+order o on o.orderId =op.orderId join customer c on c.customerid = o.customerId
+where  c.Name Like '%Joe' and o.CreatedAt > '11/1/2016'
+
+3.
+select  Sum(p.Price) from Product p , join OrderProduct op ON  p.productId = op.productId  join 
+order o on o.orderId =op.orderId join customer c on c.customerid = o.customerId
+Having c.Name = 'Joe' Group by p.price 
+
+4. 
+select  c.Name , Count(o.orderId) from Product p , join OrderProduct op ON  p.productId = op.productId  join 
+order o on o.orderId =op.orderId join customer c on c.customerid = o.customerId
+Having (select o.orderId from order o join OrderProduct op On o.orderid = op.orderid  Having Count(op.orderproductid) >2) GroupBy o.orderId 
